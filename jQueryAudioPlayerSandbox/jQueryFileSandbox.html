@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="Styles/jslider.css" type="text/css" rel="stylesheet" /> 
+    <link href="Styles/jslider.plastic.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="Scripts/jquery-1.7.1.min.js" ></script>
+    <script type="text/javascript" src="Scripts/jquery.tmpl.min.js" ></script>
+	<script type="text/javascript" src="Scripts/tmpl.js"></script>
+    <script type="text/javascript" src="Scripts/jshashtable-2.1_src.js"></script>
+	<script type="text/javascript" src="Scripts/jquery.numberformatter-1.2.3.js"></script>
+	<script type="text/javascript" src="Scripts/jquery.dependClass-0.1.js"></script>
+	<script type="text/javascript" src="Scripts/draggable-0.1.js"></script>
+        <script type="text/javascript" src="Scripts/jquery.slider.js" ></script>
+        <style>
+            body
+            {
+                font-family:Prestige Elite Std;
+                background-color:Black;
+            }
+
+         #loading {
+	        background: #fff;
+	        background: #939eaa;
+	        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eaeef1), to(#c7cfd8));
+	        background: -moz-linear-gradient(top, #eaeef1, #c7cfd8);
+	        background: linear-gradient(top, #eaeef1, #c7cfd8);
+	        -webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	        -moz-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	        -o-box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	        box-shadow: 0 1px 0 #fff inset, 0 1px 0 #141e28;
+	        -webkit-border-radius: 3px;
+	        -moz-border-radius: 3px;
+	        -o-border-radius: 3px;
+	        border-radius: 3px;
+	        display: block;
+	        float: left;
+	        min-width: 6px;
+	        height: 6px;
+        }
+        #ProgSlider
+        {
+            display:none;   
+        }
+        .apPlayerLayout
+        {
+            width:100%;
+            list-style-type:none;
+              
+        }
+        .apPlayerLayout li
+        {
+            
+            float:none;
+        }
+        .apDisplay
+        {
+            width:100%;
+            list-style-type:none;
+            clear:both;
+        } 
+        .apDisplay li
+        {
+            float:left;
+            margin:10px; 
+
+        } 
+        .apNav
+        {
+            width:100%;
+            list-style-type:none;
+            clear:both;
+        } 
+        .apNav li
+        {
+            float:left;
+            margin:10px;               
+            width: 40px;
+            height:40px;
+            border: 1px solid #FFFFFF;
+            margin-left: 5px;
+            -moz-border-radius:15%;
+            border-radius:15%;       
+            color:White;  
+            text-align:center;
+            background-image: url('img/btnVolSlider.png');
+            background-color: #000000;
+            background-position:center center;
+            background-repeat:no-repeat;
+            background-size:100%;  
+        }    
+        .apNav li.last
+        {
+            background-image:none;
+            border:0px none black;
+        }  
+        
+        .play
+        {
+            height:100%;
+            width:100%;
+            background-image: url('img/Pause.png');
+            background-position:center center;
+            background-repeat:no-repeat;
+            background-size:100%;    
+        } 
+        .next
+        {
+            height:100%;
+            width:100%;
+            background-image: url('img/PrevNext.png');
+            background-position:center center;
+            background-repeat:no-repeat;
+            background-size:100%;    
+        } 
+         .previous
+        {
+            height:100%;
+            width:100%;
+            background-image: url('img/PrevNext.png');
+            background-position:center center;
+            background-repeat:no-repeat;
+            background-size:100%;   
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH"; 
+        }
+        .mute
+        {
+            height:100%;
+            width:100%;
+            background-image: url('img/Sound.png');
+            background-position:center center;
+            background-repeat:no-repeat;
+            background-size:100%;    
+        }     
+        .SongTitle
+        {
+            color:Goldenrod;
+            width:150px;   
+        }    
+    </style>
+    <script type="text/javascript">
+        var $AudioLinks =
+        [ { Title: 'Porch Table', Path: '01 Porch Table', Type: 'omw', ID:1 },
+            { Title: 'Red Chicken', Path: '02 Red Chicken', Type: 'omw', ID: 2 },
+            { Title: 'Mene', Path: '03 Mene', Type: 'omw', ID: 3 },
+            { Title: 'Pele', Path: '04 Pele', Type: 'omw', ID: 4 },
+            { Title: 'Chamaco', Path: '05 Chamaco', Type: 'omw', ID: 5}
+        ]
+
+            var songs;
+            var currentSong;
+            var player;
+            var volume;
+            var isDrag;
+
+            $(window).ready(
+                function () {
+
+                    songs = $AudioLinks;
+                    var song = $AudioLinks[0];
+                    $('#apPlayer').tmpl(song).appendTo('body');
+                    player = new Audio();
+                    playNextSong(songs.length);
+                    SetButtonActions();
+                    SetButtonMouseOvers();
+
+
+                    function SetButtonActions() {
+                        $('.next').click(function () {
+                            playNextSong(currentSong);
+                        });
+                        $('.previous').click(function () {
+                            playPreviousSong(currentSong);
+                        });
+
+                        $('.play').click(function () {
+                            PlayPause();
+                        });
+                        $('.mute').click(function () {
+                            Mute();
+                        });
+                    }
+
+                    function SetButtonMouseOvers() {
+                        $('.next').hover(
+                            function () {
+                                $(this).css('background-image', "url('img/PrevNext_i.png')");
+                            },
+                            function () {
+                                $(this).css('background-image', "url('img/PrevNext.png')");
+                            }
+                        );
+
+                        $('.previous').hover(
+                            function () {
+                                $(this).css('background-image', "url('img/PrevNext_i.png')");
+                            },
+                            function () {
+                                $(this).css('background-image', "url('img/PrevNext.png')");
+                            }
+                        );
+
+                        $('.play').hover(
+                            function () {
+                                if (player.paused == false) {
+                                    $(this).css('background-image', "url('img/Pause_i.png')");
+                                }
+                                else {
+                                    $(this).css('background-image', "url('img/Play_i.png')");
+                                }
+                            },
+                            function () {
+                                if (player.paused == false) {
+                                    $(this).css('background-image', "url('img/Pause.png')");
+                                }
+                                else {
+                                    $(this).css('background-image', "url('img/Play.png')");
+                                }
+                            }
+                        );
+                        $('.mute').hover(
+                            function () {
+                                if (player.volume != 0) {
+                                    $(this).css('background-image', "url('img/Sound_i.png')");
+                                }
+                                else {
+                                    $(this).css('background-image', "url('img/Mute_i.png')");
+                                }
+                            },
+                            function () {
+                                if (player.volume != 0) {
+                                    $(this).css('background-image', "url('img/Sound.png')");
+                                }
+                                else {
+                                    $(this).css('background-image', "url('img/Mute.png')");
+                                }
+                            }
+                        );
+                    }
+
+                    function loadPlayer(song) {
+                        $('#ProgSlider').css({ display: 'none' });
+                        player.pause();
+                        var source = document.createElement('source');
+                        if (player.canPlayType('audio/mpeg;')) {
+                            source.type = 'audio/mpeg';
+                            source.src = 'Audio/' + song.Path + '.mp3';
+                        } else {
+                            source.type = 'audio/ogg';
+                            source.src = 'src', 'Audio/' + song.Path + '.ogg';
+                        }
+                        player.setAttribute("src", source.src);
+                        $('.SongTitle').text(song.Title);
+                        var loaded;
+                        var loadingIndicator = $('#loading');
+                        if ((player.buffered != undefined) && (player.buffered.length != 0)) {
+                            $(player).bind('progress', function () {
+                                loaded = parseInt(((player.buffered.end(0) / player.duration) * 100), 10);
+                                loadingIndicator.css({ width: loaded + '%' });
+                            });
+                        }
+                        else {
+                            loadingIndicator.remove();
+                        }
+
+                        var isLoaded = false;
+                        $(player).bind('timeupdate', function () {
+
+                            var rem = parseInt(player.duration - player.currentTime, 10),
+                            pos = (player.currentTime / player.duration) * 100,
+                            mins = Math.floor(rem / 60, 10),
+                            secs = rem - mins * 60;
+
+                            if (player.duration > 0) {
+                                if (isLoaded == false) {
+                                    $("#ProgSlider").val('0').slider({
+                                        from: 0,
+                                        to: player.duration,
+                                        step: 1,
+                                        dimension: 'min',
+                                        skin: 'plastic',
+                                        calculate: calculateTime
+                                    });
+                                    isLoaded = true;
+                                }
+                                else {
+                                    var ct = player.currentTime;
+                                    $("#ProgSlider").slider("value", ct);
+                                }
+
+                            }
+
+                            if (!loaded) {
+                                loaded = true;
+
+                            }
+
+                        })
+
+
+
+
+                        function calculateTime(value) {
+                            var mins = Math.floor(value / 60);
+                            var secs = (value - mins * 60).toFixed(0);
+                            return (mins == 0 ? "" : mins) + ":" + (secs < 10 ? (secs == 0 ? "00" : "0" + secs) : secs);
+                        }
+
+                        $("#VolSlider").val('40').slider({
+                            from: 0,
+                            to: 100,
+                            step: 5,
+                            dimension: '%',
+                            skin: 'plastic',
+                            onstatechange: function (value) {
+                                setVolume(value);
+                            }
+                        });
+                        player.play();
+
+                    }
+
+                    function setVolume(vol) {
+                        volume = vol / 100;
+                        player.volume = volume;
+                    }
+
+                    function playNextSong(index) {
+                        ++index;
+                        if (index >= songs.length) {
+                            index = 0;
+                        }
+                        currentSong = index;
+                        loadPlayer(songs[index]); ;
+                    }
+
+                    function playPreviousSong(index) {
+                        --index;
+                        if (index < 0) {
+                            index = songs.length - 1;
+                        }
+                        currentSong = index;
+                        loadPlayer(songs[index]); ;
+                    }
+
+                    function PlayPause() {
+                        if (player.paused == false) {
+                            player.pause();
+                            $('.play').css('background-image', "url('img/Play.png')");
+                        }
+                        else {
+                            player.play();
+                            $('.play').css('background-image', "url('img/Pause.png')");
+
+                        }
+                    }
+
+                    function Mute() {
+                        if (player.volume != 0) {
+                            volume = player.volume;
+                            player.volume = 0;
+                            $('.mute').css('background-image', "url('img/Mute.png')");
+                        }
+                        else {
+                            player.volume = volume;
+                            $('.mute').css('background-image', "url('img/Sound.png')");
+                        }
+                    }
+                });
+    </script>
+</head>
+<body>
+
+<script type="text/x-jquery-tmpl" id="apPlayer">
+  <ul class="apPlayerLayout">
+    <li>
+      <ul class="apDisplay">
+        <li class="SongTitle"></li>
+        <li><div style="width:150px;">
+            <span id="loading">Loading...</span>
+            <input  id="ProgSlider" type="slider" style="display:none;" min="0" title="Duration" />            
+            </div></li>
+      </ul>
+    </li>
+    <li>
+      <ul  class="apNav">
+        <li><div class="previous"/></li>
+        <li><div class="play"/></li>
+        <li><div class="next"/></li>
+        <li><div class="mute"/></li>
+        <li class="last"><div style="width:50px;"><input  id="VolSlider" type="slider" value="100" /></div></li>
+      </ul>
+    </li>
+</ul>
+</script>
+</body>
+</html>

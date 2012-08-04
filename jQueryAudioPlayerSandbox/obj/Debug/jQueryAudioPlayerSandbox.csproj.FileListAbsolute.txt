@@ -1,0 +1,5 @@
+D:\Projects\jQueryAudioPlayerSandbox\jQueryAudioPlayerSandbox\bin\jQueryAudioPlayerSandbox.dll
+D:\Projects\jQueryAudioPlayerSandbox\jQueryAudioPlayerSandbox\bin\jQueryAudioPlayerSandbox.pdb
+D:\Projects\jQueryAudioPlayerSandbox\jQueryAudioPlayerSandbox\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\jQueryAudioPlayerSandbox\jQueryAudioPlayerSandbox\obj\Debug\jQueryAudioPlayerSandbox.dll
+D:\Projects\jQueryAudioPlayerSandbox\jQueryAudioPlayerSandbox\obj\Debug\jQueryAudioPlayerSandbox.pdb

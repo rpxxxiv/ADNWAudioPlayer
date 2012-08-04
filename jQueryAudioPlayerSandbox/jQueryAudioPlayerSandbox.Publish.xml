@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="ftp://184.168.249.1/test/AudioPlayer" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FTP" replaceMatchingFiles="False" userName="baristakid" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdBKfnL7YzUOupodPJnk2awAAAAACAAAAAAAQZgAAAAEAACAAAAD+vuwAbZRyx2nixG7S8He1LTIBrjjlfI5sshDp1MFdgwAAAAAOgAAAAAIAACAAAAB+7q5bvRVvcaRPFMYaFHR3eGUGzLZ0LZ8V1HQosvxGSCAAAADDBm0yxNPBV7PdmjaU8yZt0/pWYb+gw0omE5Qikxe0wkAAAAAvFI1wvQwffR2CvfojT7iN1bXffqhlRvHhPHB5WIhawrsqDdu2OQhS1W0dmffdgpQxbq6FzfjmiW/5Mkqjunh9" SelectedForPublish="True">
+    <file relUrl="default.htm" publishTime="07/28/2012 11:58:31" />
+    <file relUrl="Audio/01 Porch Table.mp3" publishTime="04/26/2012 13:40:33" />
+    <file relUrl="img/PrevNext.png" publishTime="08/01/2012 20:48:58" />
+    <file relUrl="Scripts/AudioLinks.js" publishTime="07/28/2012 11:58:31" />
+    <file relUrl="bin/jQueryAudioPlayerSandbox.pdb" publishTime="08/01/2012 22:36:54" />
+    <file relUrl="img/Mute.png" publishTime="08/01/2012 22:34:52" />
+    <file relUrl="img/jslider.plastic.png" publishTime="08/01/2012 22:47:01" />
+    <file relUrl="Audio/04 Pele.mp3" publishTime="04/26/2012 13:41:29" />
+    <file relUrl="img/Sound.png" publishTime="08/01/2012 22:18:33" />
+    <file relUrl="SliderSandbox.htm" publishTime="07/30/2012 19:05:11" />
+    <file relUrl="img/btnVolSlider.png" publishTime="08/01/2012 19:49:18" />
+    <file relUrl="Scripts/jquery-1.7.1.min.js" publishTime="07/28/2012 10:18:42" />
+    <file relUrl="Audio/03 Mene.mp3" publishTime="04/26/2012 13:41:12" />
+    <file relUrl="img/Play.png" publishTime="08/01/2012 20:22:44" />
+    <file relUrl="Scripts/jshashtable-2.1_src.js" publishTime="07/28/2012 19:18:33" />
+    <file relUrl="img/Pause_i.png" publishTime="08/01/2012 21:54:23" />
+    <file relUrl="img/Mute_i.png" publishTime="08/01/2012 22:34:52" />
+    <file relUrl="Scripts/jquery.tmpl.min.js" publishTime="07/28/2012 10:18:42" />
+    <file relUrl="img/Sound_i.png" publishTime="08/01/2012 22:18:33" />
+    <file relUrl="Controls/AudioPlayer.html" publishTime="08/01/2012 19:12:25" />
+    <file relUrl="Scripts/jquery.slider.js" publishTime="07/28/2012 19:10:29" />
+    <file relUrl="Audio/02 Red Chicken.mp3" publishTime="04/26/2012 13:40:52" />
+    <file relUrl="Scripts/jquery.numberformatter-1.2.3.js" publishTime="07/28/2012 19:18:33" />
+    <file relUrl="Scripts/tmpl.js" publishTime="07/28/2012 19:16:42" />
+    <file relUrl="img/Play_i.png" publishTime="08/01/2012 21:49:04" />
+    <file relUrl="img/PrevNext_i.png" publishTime="08/01/2012 21:27:58" />
+    <file relUrl="Styles/jslider.css" publishTime="07/28/2012 19:30:46" />
+    <file relUrl="Scripts/draggable-0.1.js" publishTime="07/28/2012 19:18:33" />
+    <file relUrl="Scripts/jquery.dependClass-0.1.js" publishTime="07/28/2012 19:18:33" />
+    <file relUrl="bin/jQueryAudioPlayerSandbox.dll" publishTime="08/01/2012 22:36:54" />
+    <file relUrl="Audio/04 Pele.wav" publishTime="07/28/2012 11:48:09" />
+    <file relUrl="img/Pause.png" publishTime="08/01/2012 20:38:54" />
+    <file relUrl="img/btnVolume.png" publishTime="08/01/2012 19:49:18" />
+    <file relUrl="Audio/05 Chamaco.wav" publishTime="07/28/2012 11:48:12" />
+    <file relUrl="Audio/03 Mene.wav" publishTime="07/28/2012 11:48:07" />
+    <file relUrl="Styles/Sample.css" publishTime="07/28/2012 11:10:12" />
+    <file relUrl="Audio/02 Red Chicken.wav" publishTime="07/28/2012 11:48:04" />
+    <file relUrl="Audio/05 Chamaco.mp3" publishTime="04/26/2012 13:41:37" />
+    <file relUrl="Audio/01 Porch Table.wav" publishTime="07/28/2012 11:48:03" />
+    <file relUrl="img/jslider.png" publishTime="07/28/2012 19:37:29" />
+    <file relUrl="jQueryFileSandbox.html" publishTime="08/01/2012 22:57:36" />
+    <file relUrl="Styles/jslider.plastic.css" publishTime="07/28/2012 19:30:46" />
+    <file relUrl="Web.config" publishTime="08/01/2012 22:58:44" />
+  </publishProfile>
+</publishData>
